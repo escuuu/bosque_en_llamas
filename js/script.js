@@ -57,26 +57,37 @@ function crear_tablero() {
 
 function suelo(ident){
 
-    let btn_casilla = document.getElementById(ident);
+    let button = document.getElementById(ident);
 
-    if(btn_casilla.classList.contains('4') || btn_casilla.classList.contains('5')){
+    // if(button.classList.contains('4') || button.classList.contains('5')){
 
-        btn_casilla.style.backgroundColor = "orange";
-        alert("Fuego apagado")
+    //     button.style.backgroundImage = "url(./img/cesped.jpg)";
+    //     button.style.backgroundSize = "contain";
+    //     alert("Fuego apagado")
 
-    }else if(btn_casilla.classList.contains('2') || btn_casilla.classList.contains('3')){
+    // }else if(button.classList.contains('2') || button.classList.contains('3')){
 
-        btn_casilla.style.backgroundColor = "darkgreen";
-        alert("Creando arbol");
+    //     // button.style.backgroundColor = "darkgreen";
+    //     button.style.backgroundImage = "url(https://www.gifcen.com/wp-content/uploads/2022/01/wallpaper-gif-4.gif)";
+    //     button.style.backgroundSize = "contain";
+    //     alert("Creando arbol");
 
-    }else{
+    // }else{
+    //     button.style.backgroundImage = "url(https://www.gifcen.com/wp-content/uploads/2022/01/wallpaper-gif-4.gif)";
+    //     button.style.backgroundSize = "contain";
+    //     alert("Tronco");
+    // }
 
-        btn_casilla.style.backgroundColor = "green";
-        alert("Tronco");
+    if(button.classList.contains('3')){
+        button.style.backgroundImage = "url(./img/cesped.jpg)";
+        button.style.backgroundSize = "contain";
+        alert("Fuego apagado");
     }
+
+    
 }
 
-function colorear_plantillas(button, num1, num2){
+function colorear_plantillas(random, button, num1, num2){
 
     random = Math.floor(Math.random()* 5);
 
@@ -91,7 +102,8 @@ function colorear_plantillas(button, num1, num2){
         button.className = random;
     }
     else {
-        button.style.backgroundColor = "red";
+        button.style.backgroundImage = "url(https://upload.wikimedia.org/wikipedia/commons/2/22/Animated_fire_by_nevit.gif)";
+        button.style.backgroundSize = "contain";
         button.className = random;   
     }
 }
