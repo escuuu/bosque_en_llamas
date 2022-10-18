@@ -1,10 +1,14 @@
-var tablero = document.getElementById("tablero");
-let cont1, cont2 = 1;
+let fila, colum = 1;
+let container;
+let child_container;
+let btn_casilla;
 
 function crear_tablero() {
 
+    let tablero = document.getElementById('tablero');
+
     tablero.innerHTML = "";
-    cont1 = 0;
+    fila = 0;
 
     let ancho = document.getElementById('n1').value;
     let alto = document.getElementById('n2').value;
@@ -12,87 +16,82 @@ function crear_tablero() {
 
     document.getElementById('ej').innerHTML = 'Tablero creado de ' + ancho+ 'x'+ alto;
 
-    for(let i = 0; i < ancho; i++) {
-        cont1++;
-        let container = document.createElement("div");
-        let child_container = document.createElement("div");
+    for(let i = 1; i <= ancho; i++) {
+        fila++;
+        container = document.createElement("div");
+        child_container = document.createElement("div");
 
-        let btn_casilla = document.createElement("button");
-        btn_casilla.id = "btn" + cont1 + cont2;
-        btn_casilla.onclick = function(){suelo(this.id)};
-        btn_casilla.param = "btn" + cont2 + cont1;
+        btn_casilla = document.createElement("button");
+        btn_casilla.id = "btn" + colum + fila;
+        btn_casilla.onclick = function(){suelo(this.id); };
+        btn_casilla.param = "btn" + colum + fila;
 
-        child_container.id = "cell" + cont2 + cont1;
-        container.id = "container" + cont1;
+        child_container.id = "cell" + colum + fila;
+        container.id = "container" + fila;
 
-        tab.appendChild(container);
+        tablero.appendChild(container);
         container.appendChild(child_container);
         child_container.appendChild(btn_casilla);
 
+        colorear_plantillas(num, btn_casilla, colum, fila);
 
-        colorear_plantillas(num, btn_casilla, cont2, cont2);
+        for(let j = 1; j < alto; j++){
+            colum++;
+            child_container = document.createElement("div");
+            child_container.id = "celda" + colum + fila;
+            btn_casilla = document.createElement("button");
+            btn_casilla.id =  "btn" + colum + fila;
 
-        for(let j = 0; j < alto; j++){
-            cont2++;
-            div = document.createElement("div");
-            div.id = "celda" + cont2 + cont1;
-            btn = document.createElement("button");
-            btn.id =  "btn" + cont2 + cont1;
 
-            //crear_elemento(btn, "button", "btn", cont2 + cont1);
-            divpadre.appendChild(div);
-            btn.textContent =  cont2 +","+ cont1;
-            btn.addEventListener("click", function(){cambiar_color(this.id)});
+            container.appendChild(child_container);
+            // btn_casilla.textContent =  colum +","+ fila;
+            btn_casilla.addEventListener("click", function(){suelo(this.id); });
 
-            div.appendChild(btn);
-            colorear_plantillas(num, btn, cont2, cont1);
+            child_container.appendChild(btn_casilla);
+            colorear_plantillas(num, btn_casilla, colum, fila);
         }
-        cont2 = 1;
+        colum = 1;
     }
 
 }
 
 function suelo(ident){
 
-    let btn = document.getElementById(ident)
+    let btn_casilla = document.getElementById(ident);
 
-    if(btn.classList.contains('4') || btn.classList.contains('5')){
+    if(btn_casilla.classList.contains('4') || btn_casilla.classList.contains('5')){
 
-        btn.style.backgroundColor = "orange";
+        btn_casilla.style.backgroundColor = "orange";
         alert("Fuego apagado")
 
-    }else if(btn.classList.contains('2') || btn.classList.contains('3')){
+    }else if(btn_casilla.classList.contains('2') || btn_casilla.classList.contains('3')){
 
-        btn.style.backgroundColor = "darkgreen";
+        btn_casilla.style.backgroundColor = "darkgreen";
         alert("Creando arbol");
 
     }else{
 
-        btn.style.backgroundColor = "green";
+        btn_casilla.style.backgroundColor = "green";
         alert("Tronco");
     }
 }
 
-function colorear_plantillas(random, container, num1, num2){
+function colorear_plantillas(button, num1, num2){
 
     random = Math.floor(Math.random()* 5);
 
-    container = document.getElementById("btn" + num1 + num2)
+    button = document.getElementById("btn" + num1 + num2);
 
-    if(random > 1 && random < 4){
+    console.log(button);
 
-        container.style.backgroundColor = "green";
-        container.className = random;
+    if(random != 3){
+
+        button.style.backgroundImage = "url(./img/cesped.jpg)";
+        button.style.backgroundSize = "contain";
+        button.className = random;
     }
-    else if(random > 3){
-        
-        container.style.backgroundColor = "red";
-        container.className = random;
-        
-    }
-    else{
-
-        container.style.backgroundColor = "darkgreen";
-        container.className = random;
+    else {
+        button.style.backgroundColor = "red";
+        button.className = random;   
     }
 }
