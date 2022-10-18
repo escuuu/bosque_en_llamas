@@ -56,54 +56,40 @@ function crear_tablero() {
 }
 
 function suelo(ident){
-
+    random = Math.floor(Math.random()* 2);
     let button = document.getElementById(ident);
 
-    // if(button.classList.contains('4') || button.classList.contains('5')){
 
-    //     button.style.backgroundImage = "url(./img/cesped.jpg)";
-    //     button.style.backgroundSize = "contain";
-    //     alert("Fuego apagado")
-
-    // }else if(button.classList.contains('2') || button.classList.contains('3')){
-
-    //     // button.style.backgroundColor = "darkgreen";
-    //     button.style.backgroundImage = "url(https://www.gifcen.com/wp-content/uploads/2022/01/wallpaper-gif-4.gif)";
-    //     button.style.backgroundSize = "contain";
-    //     alert("Creando arbol");
-
-    // }else{
-    //     button.style.backgroundImage = "url(https://www.gifcen.com/wp-content/uploads/2022/01/wallpaper-gif-4.gif)";
-    //     button.style.backgroundSize = "contain";
-    //     alert("Tronco");
-    // }
-
-    if(button.classList.contains('3')){
+    if(button.classList.contains('1')) {
         button.style.backgroundImage = "url(./img/cesped.jpg)";
         button.style.backgroundSize = "contain";
-        alert("Fuego apagado");
+        alert("Césped plantado");
     }
-
-    
 }
 
 function colorear_plantillas(random, button, num1, num2){
 
-    random = Math.floor(Math.random()* 5);
+    random = Math.floor(Math.random()* 2);
 
     button = document.getElementById("btn" + num1 + num2);
 
-    console.log(button);
-
-    if(random != 3){
-
+    if(random == 0){
         button.style.backgroundImage = "url(./img/cesped.jpg)";
+        button.title = 'Plantar arbol';
         button.style.backgroundSize = "contain";
         button.className = random;
     }
+
     else {
-        button.style.backgroundImage = "url(https://upload.wikimedia.org/wikipedia/commons/2/22/Animated_fire_by_nevit.gif)";
+        button.style.backgroundImage = "url(./img/suelo.jpg)";
+        button.title = 'Crecer cesped';
         button.style.backgroundSize = "contain";
         button.className = random;   
     }
+
+    // else {
+    //     button.style.backgroundImage = "url(https://upload.wikimedia.org/wikipedia/commons/2/22/Animated_fire_by_nevit.gif)";
+    //     button.style.backgroundSize = "contain";
+    //     button.className = random;
+    // }
 }
